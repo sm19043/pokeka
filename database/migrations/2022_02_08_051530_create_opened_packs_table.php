@@ -14,8 +14,12 @@ class CreateOpenedPacksTable extends Migration
     public function up()
     {
         Schema::create('opened_packs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('body',200);
+            $table->integer('category_id')->unsigned();
+            $table->integer('users_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
