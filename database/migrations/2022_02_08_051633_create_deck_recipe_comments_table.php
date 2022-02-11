@@ -14,8 +14,11 @@ class CreateDeckRecipeCommentsTable extends Migration
     public function up()
     {
         Schema::create('deck_recipe_comments', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->integer('deck_recipes_id')->unsigned();
+            $table->integer('users_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

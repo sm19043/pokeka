@@ -17,6 +17,7 @@ class CreateDeckRecipesTable extends Migration
             $table->increments('id');
             $table->string('title',50);
             $table->string('body',200);
+            $table->integer('users_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });
