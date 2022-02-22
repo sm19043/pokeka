@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeckRecipeCommentsTable extends Migration
+class CreateDeckrecipeCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateDeckRecipeCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('deck_recipe_comments', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('deckrecipe_comments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('deckrecipe_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->string('body',200);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

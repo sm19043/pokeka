@@ -14,8 +14,11 @@ class CreateOpenedPackReactionsTable extends Migration
     public function up()
     {
         Schema::create('opened_pack_reactions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('opened_pack_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

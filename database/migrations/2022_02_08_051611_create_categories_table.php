@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeckRecipeReactionsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateDeckRecipeReactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('deck_recipe_reactions', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+        Schema::create('categories', function (Blueprint $table) {
+        $table->increments('id');
+        $table->string('name', 50);
+        $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateDeckRecipeReactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deck_recipe_reactions');
+        Schema::dropIfExists('categorys');
     }
 }
