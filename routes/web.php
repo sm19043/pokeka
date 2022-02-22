@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'DeckrecipeController@index');
+
+
+Route::get('/home','HomeController@');
+
+
+
+
+Route::group(['middleware' => ['auth']], function(){
+    
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -17,7 +17,7 @@ class CreateOpenedPacksTable extends Migration
             $table->increments('id');
             $table->string('body',200);
             $table->integer('category_id')->unsigned();
-            $table->integer('users_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });
