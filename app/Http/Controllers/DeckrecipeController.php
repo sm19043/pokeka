@@ -24,7 +24,7 @@ class DeckrecipeController extends Controller
     {
         $input = $request['post'];
         $post->fill($input)->save();
-        return redirect('/posts/' . $post->id);
+        return redirect('/deckrecipe/' . $post->id);
     }
     
     // デッキレシピの詳細画面に行く

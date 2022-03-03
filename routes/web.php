@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/', 'TopController@index'); //
+
 Route::get('/deckrecipe', 'DeckrecipeController@index'); //デッキレシピのトップ画面
 
 Route::get('/deckrecipe/create', 'DeckrecipeController@create'); //デッキレシピ投稿作成画面
