@@ -11,7 +11,7 @@ class DeckrecipesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Deckrecipe::class, 30)->create();
+        factory(App\Deckrecipe::class, 10)->create();
         //
     }
 }

@@ -3,21 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Deckrecipe;
-use App\Http\Requests\DeckrecipeRequest;
-use Illuminate\Support\Facades\Auth;
-use Storage;
-
+use Illuminate\Http\Request;
 
 class DeckrecipeController extends Controller
 {
     // デッキレシピのトップ画面に行く
-    public function index(Deckrecipe $deckrecipe)
+    public function index(Deckrecipe $post)
     {
-        
-        $user_id = Auth::id();
-        $deckrecipes = Deckrecipe::all();
-        
-        return view('deckrecipe/index')->with(['deckrecipes' => $deckrecipe->getPaginateByLimit(),'user_id' => $user_id]);   
+        return view('deckrecipe/index')->with(['posts' => $post->getPaginateByLimit()]);   
     }
     
     //デッキレシピ投稿作成画面に行く
@@ -27,90 +20,22 @@ class DeckrecipeController extends Controller
     }
     
     //投稿をDBへ登録する
-    public function store(Deckrecipe $deckrecipe, DeckrecipeRequest $request)
+    public function store(Deckrecipe $post, DeckrecipeRequest $request)
     {
-        $input = $request['deckrecipe'];
-        
-        if ($request->hasFile('image_path')) {
-        //s3アップロード開始
-        $image = $input['image_path'];
-        // バケットの`myprefix`フォルダへアップロード
-        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
-        // アップロードした画像のフルパスを取得
-        $input['image_path']= Storage::disk('s3')->url($path);
-        }
-        
-        //ログイン中のユーザーIDの取得
-        $input['user_id'] = Auth::id();
-        //$inputの内容を$deckrecipeに保存
-        $deckrecipe->fill($input);
-        
-        $deckrecipe->save();
-        
-        // $post->fill($input,$user_id)->save();
-        return redirect('/deckrecipe/' . $deckrecipe->id);
+        $input = $request['post'];
+        $post->fill($input)->save();
+        return redirect('/posts/' . $post->id);
     }
     
     // デッキレシピの詳細画面に行く
-    public function show(Deckrecipe $deckrecipe)
+    public function show(Deckrecipe $post)
     {
-        return view('deckrecipe/show')->with(['deckrecipe' => $deckrecipe]);
+        return view('deckrecipe/show')->with(['post' => $post]);
     }
     
-    //デッキレシピ編集画面に行く
-    public function edit(Deckrecipe $deckrecipe)
+    public function edit(Deckrecipe $post)
     {
-        return view('deckrecipe/edit')->with(['deckrecipe' => $deckrecipe]);
+        return view('deckrecipe/edit')->with(['post' => $post]);
     }
-    
-    //変更内容を更新
-    public function update(DeckrecipeRequest $request, Deckrecipe $deckrecipe)
-    {
-        $input_deckrecipe = $request['deckrecipe'];
-        $deckrecipe->fill($input_deckrecipe)->save();
-        
-        return redirect('/deckrecipe/' . $deckrecipe->id);
-    }
-    
-    //投稿の削除
-    public function delete(Deckrecipe $deckrecipe)
-    {
-        $deckrecipe->delete();
-        return redirect('/deckrecipe');
-    }
-    
-    public function add()
-    {
-        return view('decrecipe/create');
-    }
-    
-    public function __construct()
-    {
-        $this->middleware(['auth','verified'])->only(['like','unlike']);
-    }
-    
-    public function like($id)
-    {
-        DeckrecipeRequest::create([
-            'deckrecipe_id' => $id,
-            'user_id' => Auth::id(),
-            ]);
-            
-            session()->flash('OK');
-            
-            return redirect()->back();
-    }
-    
-        public function unlike($id)
-    {
-        $like = DeckrecipeRequest::where('deckrecipe_id',$id)->where('user_id', Auth::id())->first();
-        $like->delete();
-            
-        session()->flash('OK');
-            
-        return redirect()->back();
-    }
-    
-    
     //
 }
