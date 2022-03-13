@@ -19,6 +19,7 @@ class CreateDeckrecipesTable extends Migration
             $table->string('deck_code',50);
             $table->string('body',200);
             $table->integer('user_id')->unsigned();
+            $table->string('image_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

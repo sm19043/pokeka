@@ -15,9 +15,9 @@ class DeckrecipeRequest extends FormRequest
     public function rules()
     {
         return [
-            'post.title' => 'required|string|max:100',
-            'post.deck_code' => 'request|string|max:100',
-            'post.body' => 'request|string|max:4000',
+            'deckrecipe.title' => 'required|string|max:100',
+            'deckrecipe.deck_code' => 'required|string|max:100',
+            'deckrecipe.body' => 'required|string|max:4000',
             //
         ];
     }
