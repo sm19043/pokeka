@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -38,8 +39,13 @@ class User extends Authenticatable
     ];
     
     public function deckrecipes()   
-{
-    return $this->hasMany('App\Deckrecipe');  
-}
+    {
+        return $this->hasMany('App\Deckrecipe');  
+    }
+
+    public function reactions()
+    {
+        return $this->hasMany(DeckrecipeReaction::class);
+    }
     
 }

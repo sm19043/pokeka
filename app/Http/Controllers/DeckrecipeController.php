@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Deckrecipe;
+use App\DeckrecipeReaction;
 use App\Http\Requests\DeckrecipeRequest;
 use Illuminate\Support\Facades\Auth;
 use Storage;
@@ -13,11 +14,12 @@ class DeckrecipeController extends Controller
     // デッキレシピのトップ画面に行く
     public function index(Deckrecipe $deckrecipe)
     {
+        // $user_id = Auth::id();
         
-        $user_id = Auth::id();
+       
         $deckrecipes = Deckrecipe::all();
         
-        return view('deckrecipe/index')->with(['deckrecipes' => $deckrecipe->getPaginateByLimit(),'user_id' => $user_id]);   
+        return view('deckrecipe/index')->with(['deckrecipes' => $deckrecipe->getPaginateByLimit()]);   
     }
     
     //デッキレシピ投稿作成画面に行く
@@ -83,34 +85,6 @@ class DeckrecipeController extends Controller
     {
         return view('decrecipe/create');
     }
-    
-    public function __construct()
-    {
-        $this->middleware(['auth','verified'])->only(['like','unlike']);
-    }
-    
-    public function like($id)
-    {
-        DeckrecipeRequest::create([
-            'deckrecipe_id' => $id,
-            'user_id' => Auth::id(),
-            ]);
-            
-            session()->flash('OK');
-            
-            return redirect()->back();
-    }
-    
-        public function unlike($id)
-    {
-        $like = DeckrecipeRequest::where('deckrecipe_id',$id)->where('user_id', Auth::id())->first();
-        $like->delete();
-            
-        session()->flash('OK');
-            
-        return redirect()->back();
-    }
-    
     
     //
 }
