@@ -3,14 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Deckrecipe;
-use Illuminate\Http\Request;
+
+use App\DeckrecipeReaction;
+use App\Http\Requests\DeckrecipeRequest;
+use Illuminate\Support\Facades\Auth;
+use Storage;
+
+
 
 class DeckrecipeController extends Controller
 {
     // デッキレシピのトップ画面に行く
     public function index(Deckrecipe $post)
     {
-        return view('deckrecipe/index')->with(['posts' => $post->getPaginateByLimit()]);   
+
+        // $user_id = Auth::id();
+        
+       
+        $deckrecipes = Deckrecipe::all();
+        
+        return view('deckrecipe/index')->with(['deckrecipes' => $deckrecipe->getPaginateByLimit()]);   
+
     }
     
     //デッキレシピ投稿作成画面に行く
@@ -37,5 +50,18 @@ class DeckrecipeController extends Controller
     {
         return view('deckrecipe/edit')->with(['post' => $post]);
     }
-    //
+
+    
+    //投稿の削除
+    public function delete(Deckrecipe $deckrecipe)
+    {
+        $deckrecipe->delete();
+        return redirect('/deckrecipe');
+    }
+    
+    public function add()
+    {
+        return view('decrecipe/create');
+    }
+
 }

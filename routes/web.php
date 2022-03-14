@@ -17,12 +17,18 @@ Route::get('/deckrecipe/create', 'DeckrecipeController@create'); //デッキレ�
 
 Route::post('/deckrecipe', 'DeckrecipeController@store'); //投稿を保存
 
-Route::get('/deckrecipe/{post}/edit', 'DeckrecipeController@edit'); //投稿を編集画面へ
+Route::get('/deckrecipe/like/{deckrecipe}', 'DeckrecipeReactionController@like')->name('like');//いいね
 
-Route::put('/deckrecipe/{post}', 'DeckrecipeController@update'); //投稿編集を実行
+Route::get('/deckrecipe/unlike/{deckrecipe}', 'DeckrecipeReactionController@unlike')->name('unlike');//いいね取り消し
 
-Route::get('/deckrecipe/{post}', 'DeckrecipeController@show'); //デッキレシピ詳細画面
+Route::get('/deckrecipe/{deckrecipe}/edit', 'DeckrecipeController@edit'); //投稿を編集画面へ
 
+
+Route::put('/deckrecipe/{deckrecipe}', 'DeckrecipeController@update'); //投稿編集を実行
+
+Route::get('/deckrecipe/{deckrecipe}', 'DeckrecipeController@show'); //デッキレシピ詳細画面
+
+Route::delete('/deckrecipe/{deckrecipe}', 'DeckrecipeController@delete');//デッキレシピ削除
 
 Route::get('/home','HomeController@');
 
