@@ -32,13 +32,7 @@ class DeckrecipeController extends Controller
         return view('deckrecipe/create');
     }
     
-    //投稿をDBへ登録する
-    public function store(Deckrecipe $post, DeckrecipeRequest $request)
-    {
-        $input = $request['post'];
-        $post->fill($input)->save();
-        return redirect('/posts/' . $post->id);
-    }
+    
     
     // デッキレシピの詳細画面に行く
      public function store(Deckrecipe $deckrecipe, DeckrecipeRequest $request)
