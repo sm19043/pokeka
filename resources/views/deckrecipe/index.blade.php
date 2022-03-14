@@ -65,7 +65,7 @@
         </div>
         <!--ページネーション-->
         <div class='paginate'>
-            {{ $posts->links() }}
+           
         </div>
         
         
