@@ -11,6 +11,7 @@ $factory->define(Deckrecipe::class, function (Faker $faker) {
         'deck_code' => $faker->text($maxNbChars = 6),
         'body' => $faker->text($maxNbChars = 6),
         'user_id' => 1,
+        'image_path' => null
         
         //
     ];
