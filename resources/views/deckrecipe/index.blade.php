@@ -10,10 +10,9 @@
     
     <body class='game container'>
         <h1 class='game'>デッキレシピ</h1>
-        @if( Auth::check() )
         <a href='/deckrecipe/create'>新規投稿作成</a>
-        @endif
         </h2>
+
         <div class='newdeckrecipe row text-center'>
             <!--@のなか繰り返し-->
             @foreach ($deckrecipes as $deckrecipe)
@@ -61,11 +60,12 @@
                     </form>
                     @endif
                 </div>
+
             @endforeach
         </div>
         <!--ページネーション-->
         <div class='paginate'>
-            {{ $deckrecipes->links() }}
+            {{ $posts->links() }}
         </div>
         
         

@@ -37,6 +37,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     
     public function deckrecipes()   
     {
@@ -47,5 +48,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(DeckrecipeReaction::class);
     }
-    
+
 }

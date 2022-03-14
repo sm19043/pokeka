@@ -15,15 +15,5 @@ class DeckrecipeReaction extends Model
         'deckrecipe_id'
     ];
     
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-    
-    public function deckrecipe()
-    {
-        return $this->belongsTo(Deckrecipe::class);
-    }
-    
     //
 }

@@ -12,23 +12,19 @@
     <body class="game">
         <!--タイトル-->
         <h1 class="title">
-            {{ $deckrecipe->title }}
+            {{ $post->title }}
         </h1>
         <!--デッキコード-->
         <h1 class="title">
-            {{ $deckrecipe->deck_code }}
+            {{ $post->deck_code }}
         </h1>
         <!--本文-->
         <div class="content">
-            <div class="content__deckrecipe">
+            <div class="content__post">
                 <h3>本文</h3>
-                <p>{{ $deckrecipe->body }}</p>
+                <p>{{ $post->body }}</p>
             </div>
         </div>
-        @if ($deckrecipe->image_path)
-            <!-- 画像を表示 -->
-            <img src="{{ $deckrecipe->image_path }}">
-        @endif
         <!--戻る-->
         <div class="footer">
             <a href="/deckrecipe">戻る</a>
