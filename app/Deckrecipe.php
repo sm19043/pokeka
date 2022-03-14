@@ -14,7 +14,8 @@ class Deckrecipe extends Model
         'title',
         'deck_code',
         'body',
-        'user_id'
+        'user_id',
+        'image_path'
     ];
     
     public function getPaginateByLimit(int $limit_count = 10)
@@ -22,5 +23,18 @@ class Deckrecipe extends Model
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
+    
+      //Categoryに対するリレーション
+    //「1対多」の関係なので単数系に
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+    
+    public function reactions()
+    {
+        return $this->hasMany(DeckrecipeReaction::class, 'deckrecipe_id');
+    }
+    //
     //
 }
