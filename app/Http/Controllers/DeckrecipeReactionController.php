@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DeckrecipeReactionController extends Controller
 {
-    
+
     public function like(Deckrecipe $deckrecipe, Request $request)
     {
         $like=New DeckrecipeReaction();
@@ -18,7 +18,7 @@ class DeckrecipeReactionController extends Controller
         $like->save();
         return back();
     }
-    
+
     public function unlike(Deckrecipe $deckrecipe, Request $request)
     {
         $user=Auth::user()->id;
