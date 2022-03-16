@@ -21,7 +21,6 @@
         <!--本文-->
         <div class="content">
             <div class="content__deckrecipe">
-                <h3>本文</h3>
                 <p>{{ $deckrecipe->body }}</p>
             </div>
         </div>
